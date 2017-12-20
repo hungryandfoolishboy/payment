@@ -5,6 +5,7 @@ use Payment\Common\BaseData;
 use Payment\Utils\ArrayUtil;
 use Payment\Utils\Rsa2Encrypt;
 use Payment\Utils\RsaEncrypt;
+use Payment\Utils\Md5Encrypt;
 
 /**
  * Class BaseData
@@ -57,6 +58,11 @@ abstract class AliBaseData extends BaseData
                 $rsa = new Rsa2Encrypt($this->rsaPrivateKey);
 
                 $sign = $rsa->encrypt($signStr);
+                break;
+            case 'MD5':
+                $md5 = new Md5Encrypt($this->personalKey);
+
+                $sign = $md5->encrypt($signStr);
                 break;
             default:
                 $sign = '';
